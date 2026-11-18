@@ -1,0 +1,14 @@
+آدم AI — حزمة جاهزة للنشر
+
+هذه نسخة تجريبية فقط: البيانات محفوظة في المتصفح، والمحادثة ردود تجريبية. لا يوجد اتصال بـ Dify أو قاعدة بيانات أو تسجيل دخول.
+
+النشر المجاني عبر GitHub Pages (يتطلب حسابك، ولا ترسل كلمة مرور أو رمز تحقق لأي شخص):
+1) سجّل دخولك إلى GitHub وأنشئ Repository باسم adam-ai-control-center. اجعله Public للمسار المجاني الأبسط، ولا تضف README أو License أو gitignore عند الإنشاء.
+2) داخل المستودع اختر Add file ثم Upload files. ارفع ملفات الحزمة: index.html وmanifest.json وsw.js وicon.svg ومجلد .github.
+3) اضغط Commit changes إلى فرع main.
+4) Settings ثم Pages ثم Source: اختر GitHub Actions.
+5) افتح Actions وانتظر اكتمال Deploy Adam AI to GitHub Pages.
+6) رابط الموقع سيظهر في إعدادات Pages بعد نجاح النشر.
+7) افتح الرابط في Chrome على الهاتف ثم القائمة ⋮ ثم Add to Home screen أو Install app.
+
+ملف workflow المرفق ينشر الملفات الثابتة فقط. لا ترفع مفاتيح API أو كلمات مرور.

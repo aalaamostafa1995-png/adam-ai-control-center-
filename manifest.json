@@ -1,0 +1,17 @@
+{
+  "name": "Adam AI — Control Center V1",
+  "short_name": "Adam AI",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "description": "Arabic-first personal AI control center prototype",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

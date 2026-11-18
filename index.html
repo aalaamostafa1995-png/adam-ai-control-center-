@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>Adam AI — Control Center</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--bg:#0b1220;--panel:#121d2e;--panel2:#18263a;--line:#26364e;--gold:#d4b477;--text:#eef3fa;--muted:#95a7bd;--green:#58d49c;--red:#e68181;--blue:#4c83db}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:flex}.sidebar{width:250px;background:#0e1726;border-left:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;padding:8px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#d8bd86,#8c6c38);color:#101827;display:grid;place-items:center;font-weight:900;font-size:22px}
+.brand strong{letter-spacing:.5px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;color:var(--muted);text-align:right;padding:12px;border-radius:12px}.nav button.active,.nav button:hover{background:var(--panel2);color:var(--gold)}
+.sidebar-foot{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:12px;color:var(--muted);font-size:12px}
+.main{flex:1;min-width:0;padding:24px;max-width:1500px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}.top h1{font-size:22px;margin:0}.top p{color:var(--muted);margin:6px 0 0}.status{color:var(--green);border:1px solid #285d49;background:#142b25;padding:8px 12px;border-radius:30px;font-size:12px}
+.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}.stat label{color:var(--muted);font-size:13px}.stat strong{display:block;font-size:28px;margin-top:10px}.stat .hint{font-size:12px;color:var(--gold);margin-top:7px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 12px}.section-head h2{font-size:17px;margin:0}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 14px;border-radius:12px}.btn.primary{background:var(--gold);border-color:var(--gold);color:#101827;font-weight:700}.btn.danger{color:var(--red)}.btn.small{padding:7px 10px;font-size:12px}
+.activity,.task-list,.project-list,.approval-list{display:grid;gap:10px}.item{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;justify-content:space-between;gap:12px;align-items:center}.item-title{font-weight:650}.sub{color:var(--muted);font-size:12px;margin-top:5px}.pill{font-size:11px;padding:5px 9px;border-radius:30px;background:#22334a;color:#b9cce1;white-space:nowrap}.pill.green{background:#15352a;color:var(--green)}.pill.gold{background:#3b3020;color:var(--gold)}.pill.red{background:#3a2428;color:var(--red)}
+.chatbox{height:min(65vh,650px);display:flex;flex-direction:column;overflow:hidden}.messages{padding:16px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:12px}.bubble{max-width:85%;padding:12px 14px;border-radius:16px;line-height:1.7;background:var(--panel2);align-self:flex-start}.bubble.user{background:#263c5b;align-self:flex-end}.bubble .sub{margin-top:8px}.chat-input{display:flex;gap:9px;border-top:1px solid var(--line);padding:12px}.chat-input input{flex:1;min-width:0;background:#0c1523;border:1px solid var(--line);border-radius:12px;color:var(--text);padding:12px}
+.form-row{display:flex;gap:9px;flex-wrap:wrap}.form-row input,.form-row select,.modal input,.modal textarea{background:#0c1523;border:1px solid var(--line);border-radius:11px;color:var(--text);padding:11px;min-width:0}.form-row input{flex:1}.empty{color:var(--muted);text-align:center;padding:26px}.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:18px;z-index:9}.modal.show{display:flex}.modal-box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;width:min(480px,100%);display:grid;gap:12px}.modal-box h3{margin:0}.modal input,.modal textarea{width:100%}.mobile-nav{display:none}
+@media(max-width:900px){.sidebar{width:210px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.main{padding:18px}}
+@media(max-width:650px){.app{display:block}.sidebar{display:none}.main{padding:16px 14px 90px}.top h1{font-size:19px}.status{font-size:11px}.grid{gap:10px}.card{padding:14px}.stat strong{font-size:24px}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#0e1726;border-top:1px solid var(--line);padding:7px 4px calc(7px + env(safe-area-inset-bottom));justify-content:space-around;z-index:5}.mobile-nav button{border:0;background:transparent;color:var(--muted);font-size:11px;display:grid;gap:3px;justify-items:center;padding:5px}.mobile-nav button.active{color:var(--gold)}.mobile-nav span{font-size:19px}.item{align-items:flex-start}.chatbox{height:65vh}.bubble{max-width:92%}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><div class="logo">A</div><div><strong>ADAM AI</strong><small>CONTROL CENTER V1</small></div></div>
+<nav class="nav" id="nav">
+<button class="active" data-page="dashboard">⌂ &nbsp; الرئيسية</button>
+<button data-page="chat">◉ &nbsp; محادثة آدم</button>
+<button data-page="tasks">☷ &nbsp; مركز المهام</button>
+<button data-page="projects">▣ &nbsp; المشاريع</button>
+<button data-page="approvals">✓ &nbsp; الموافقات</button>
+</nav>
+<div class="sidebar-foot">● النموذج الأولي يعمل محلياً<br>بياناتك محفوظة على هذا المتصفح</div>
+</aside>
+<main class="main">
+<header class="top"><div><h1 id="pageTitle">لوحة القيادة</h1><p id="pageSub">نظرة عامة على مساحة عمل آدم</p></div><div class="status">● جاهز — تجريبي</div></header>
+
+<section class="page active" id="dashboard">
+<div class="grid">
+<div class="card stat"><label>المشاريع النشطة</label><strong id="statProjects">0</strong><div class="hint">مساحة عملك</div></div>
+<div class="card stat"><label>المهام المفتوحة</label><strong id="statOpen">0</strong><div class="hint">تحتاج متابعة</div></div>
+<div class="card stat"><label>مهام مكتملة</label><strong id="statDone">0</strong><div class="hint">إنجازات موثقة</div></div>
+<div class="card stat"><label>موافقات معلقة</label><strong id="statApprovals">0</strong><div class="hint">تحتاج قرارك</div></div>
+</div>
+<div class="section-head"><h2>إجراءات سريعة</h2><button class="btn primary" onclick="openTaskModal()">＋ مهمة جديدة</button></div>
+<div class="grid">
+<div class="card" style="cursor:pointer" onclick="showPage('chat')"><h3>💬 تحدث مع آدم</h3><p class="sub">اكتب هدفاً أو اطلب خطة</p></div>
+<div class="card" style="cursor:pointer" onclick="showPage('tasks')"><h3>☷ متابعة المهام</h3><p class="sub">راجع التقدم والحالات</p></div>
+</div>
+<div class="section-head"><h2>آخر المهام</h2><button class="btn" onclick="showPage('tasks')">عرض الكل</button></div>
+<div class="task-list" id="recentTasks"></div>
+</section>
+
+<section class="page" id="chat">
+<div class="card chatbox"><div class="messages" id="messages">
+<div class="bubble">أهلاً بك! أنا آدم، مساعدك الشخصي. هذه نسخة تجريبية من واجهتي. يمكنني هنا تنظيم أفكارك وتحويل رسائلك إلى مهام محلية، لكن الاتصال بالذكاء الاصطناعي الحقيقي لم يُفعّل بعد.</div>
+</div><div class="chat-input"><input id="chatInput" placeholder="اكتب رسالة لآدم..." autocomplete="off"><button class="btn primary" onclick="sendChat()">إرسال</button></div></div>
+</section>
+
+<section class="page" id="tasks">
+<div class="section-head"><h2>كل المهام</h2><button class="btn primary" onclick="openTaskModal()">＋ إضافة مهمة</button></div>
+<div class="form-row" style="margin-bottom:12px"><select id="taskFilter" onchange="renderTasks()"><option value="all">كل الحالات</option><option value="new">جديدة</option><option value="progress">قيد التنفيذ</option><option value="review">مراجعة</option><option value="done">مكتملة</option><option value="blocked">متوقفة</option></select></div>
+<div class="task-list" id="allTasks"></div>
+</section>
+
+<section class="page" id="projects">
+<div class="section-head"><h2>المشاريع</h2><button class="btn primary" onclick="openProjectModal()">＋ مشروع جديد</button></div>
+<div class="project-list" id="projectsList"></div>
+</section>
+
+<section class="page" id="approvals">
+<div class="section-head"><h2>طلبات الموافقة</h2><span class="pill gold">تجريبي فقط</span></div>
+<div class="approval-list" id="approvalsList"></div>
+</section>
+</main>
+</div>
+<nav class="mobile-nav" id="mobileNav">
+<button class="active" data-page="dashboard"><span>⌂</span>الرئيسية</button>
+<button data-page="chat"><span>◉</span>آدم</button>
+<button data-page="tasks"><span>☷</span>المهام</button>
+<button data-page="projects"><span>▣</span>المشاريع</button>
+<button data-page="approvals"><span>✓</span>الموافقات</button>
+</nav>
+
+<div class="modal" id="taskModal"><div class="modal-box"><h3>إضافة مهمة</h3><input id="taskTitle" placeholder="عنوان المهمة"><select id="taskPriority"><option>متوسطة</option><option>عالية</option><option>منخفضة</option></select><textarea id="taskNotes" rows="3" placeholder="تفاصيل (اختياري)"></textarea><div class="form-row"><button class="btn primary" onclick="addTask()">حفظ</button><button class="btn" onclick="closeModal('taskModal')">إلغاء</button></div></div></div>
+<div class="modal" id="projectModal"><div class="modal-box"><h3>إضافة مشروع</h3><input id="projectTitle" placeholder="اسم المشروع"><textarea id="projectDesc" rows="3" placeholder="وصف مختصر"></textarea><div class="form-row"><button class="btn primary" onclick="addProject()">حفظ</button><button class="btn" onclick="closeModal('projectModal')">إلغاء</button></div></div></div>
+
+<script>
+const KEY='adam-control-center-v1';
+const defaults={tasks:[],projects:[],chat:[]};
+let data=load();
+function load(){try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return {...defaults}}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
+const labels={dashboard:['لوحة القيادة','نظرة عامة على مساحة عمل آدم'],chat:['محادثة آدم','مساحة الحوار — نموذج تجريبي'],tasks:['مركز المهام','إنشاء المهام ومتابعتها محلياً'],projects:['المشاريع','إدارة مشاريعك على هذا الجهاز'],approvals:['مركز الموافقات','طلبات تجريبية — لا تنفذ أي إجراء خارجي']};
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));document.getElementById('pageTitle').textContent=labels[id][0];document.getElementById('pageSub').textContent=labels[id][1];if(id==='chat')document.getElementById('messages').scrollTop=999999}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function statusText(s){return ({new:'جديدة',progress:'قيد التنفيذ',review:'مراجعة',done:'مكتملة',blocked:'متوقفة'})[s]||s}
+function pill(s){return `<span class="pill ${s==='done'?'green':s==='blocked'?'red':s==='review'?'gold':''}">${statusText(s)}</span>`}
+function taskHtml(t){return `<div class="item"><div><div class="item-title">${esc(t.title)}</div><div class="sub">الأولوية: ${esc(t.priority||'متوسطة')} ${t.notes?' · '+esc(t.notes):''}</div></div><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">${pill(t.status)}<select aria-label="تغيير الحالة" onchange="changeTask('${t.id}',this.value)" class="btn small"><option value="new" ${t.status==='new'?'selected':''}>جديدة</option><option value="progress" ${t.status==='progress'?'selected':''}>قيد التنفيذ</option><option value="review" ${t.status==='review'?'selected':''}>مراجعة</option><option value="done" ${t.status==='done'?'selected':''}>مكتملة</option><option value="blocked" ${t.status==='blocked'?'selected':''}>متوقفة</option></select><button class="btn small danger" onclick="deleteTask('${t.id}')">حذف</button></div></div>`}
+function renderTasks(){let all=document.getElementById('allTasks'),recent=document.getElementById('recentTasks');let filter=document.getElementById('taskFilter')?.value||'all';let ts=data.tasks.filter(t=>filter==='all'||t.status===filter);all.innerHTML=ts.length?ts.map(taskHtml).join(''):'<div class="empty">لا توجد مهام بعد. أضف أول مهمة من الزر بالأعلى.</div>';let rt=[...data.tasks].slice(-4).reverse();recent.innerHTML=rt.length?rt.map(taskHtml).join(''):'<div class="empty">لا توجد مهام بعد.</div>';document.getElementById('statOpen').textContent=data.tasks.filter(t=>!['done'].includes(t.status)).length;document.getElementById('statDone').textContent=data.tasks.filter(t=>t.status==='done').length}
+function renderProjects(){let el=document.getElementById('projectsList');el.innerHTML=data.projects.length?data.projects.map(p=>`<div class="item"><div><div class="item-title">${esc(p.title)}</div><div class="sub">${esc(p.desc||'لا يوجد وصف')} · ${new Date(p.created).toLocaleDateString('ar')}</div></div><button class="btn small danger" onclick="deleteProject('${p.id}')">حذف</button></div>`).join(''):'<div class="empty">لا توجد مشاريع بعد. أنشئ مشروعك الأول.</div>';document.getElementById('statProjects').textContent=data.projects.length}
+function renderApprovals(){document.getElementById('approvalsList').innerHTML='<div class="empty">لا توجد موافقات معلقة.<br><br>في هذه النسخة لا توجد عمليات خارجية أو موافقات حقيقية.</div>';document.getElementById('statApprovals').textContent='0'}
+function renderAll(){renderTasks();renderProjects();renderApprovals()}
+function openTaskModal(){document.getElementById('taskModal').classList.add('show')}function openProjectModal(){document.getElementById('projectModal').classList.add('show')}function closeModal(id){document.getElementById(id).classList.remove('show')}
+function addTask(){let title=document.getElementById('taskTitle').value.trim();if(!title)return;data.tasks.push({id:crypto.randomUUID(),title,priority:document.getElementById('taskPriority').value,notes:document.getElementById('taskNotes').value.trim(),status:'new',created:Date.now()});document.getElementById('taskTitle').value='';document.getElementById('taskNotes').value='';closeModal('taskModal');save()}
+function changeTask(id,status){let t=data.tasks.find(x=>x.id===id);if(t){t.status=status;t.updated=Date.now();save()}}
+function deleteTask(id){if(confirm('هل تريد حذف المهمة؟')){data.tasks=data.tasks.filter(t=>t.id!==id);save()}}
+function addProject(){let title=document.getElementById('projectTitle').value.trim();if(!title)return;data.projects.push({id:crypto.randomUUID(),title,desc:document.getElementById('projectDesc').value.trim(),created:Date.now()});document.getElementById('projectTitle').value='';document.getElementById('projectDesc').value='';closeModal('projectModal');save()}
+function deleteProject(id){if(confirm('حذف المشروع؟')){data.projects=data.projects.filter(p=>p.id!==id);save()}}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function addBubble(text,cls=''){let el=document.createElement('div');el.className='bubble '+cls;el.textContent=text;document.getElementById('messages').appendChild(el);document.getElementById('messages').scrollTop=999999}
+function sendChat(){let input=document.getElementById('chatInput'),msg=input.value.trim();if(!msg)return;addBubble(msg,'user');data.chat.push({role:'user',text:msg,time:Date.now()});input.value='';let reply='وصلت رسالتك. هذه نسخة الواجهة التجريبية، لذلك لا أستطيع تحليل الطلب بواسطة الذكاء الاصطناعي أو تنفيذ أعمال خارجية بعد. يمكنك تسجيل هدفك كـمهمة من مركز المهام.';setTimeout(()=>{addBubble(reply);data.chat.push({role:'assistant',text:reply,time:Date.now()});saveChat()},250)}
+function saveChat(){localStorage.setItem(KEY,JSON.stringify(data))}
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
+function restoreChat(){for(const m of data.chat||[])addBubble(m.text,m.role==='user'?'user':'')}
+renderAll();restoreChat();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
